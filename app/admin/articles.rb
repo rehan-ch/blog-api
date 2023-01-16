@@ -1,5 +1,5 @@
 ActiveAdmin.register Article do
-  permit_params :title, :body, :user
+  permit_params :title, :body, :user_id
 
   index do
     selectable_column
@@ -13,10 +13,27 @@ ActiveAdmin.register Article do
     f.inputs do
       f.input :title
       f.input :body
-      f.input :user
+      f.input :user_id, as: :select, collection: User.all.map { |u| [u.email, u.id] }
     end
     f.actions
   end
+
+  show do
+    attributes_table do
+      row :id
+      row :title
+      row :body
+      row :user
+    end
+
+    panel "Comments" do
+      table_for resource.comments do |comment|
+        column :id
+        column :body
+      end
+    end
+  end
+
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters

@@ -27,9 +27,13 @@ ActiveAdmin.register Article do
     end
 
     panel "Comments" do
+      div do
+        link_to "test", "#"
+      end
       table_for resource.comments do |comment|
         column :id
         column :body
+        column :created_at
       end
     end
   end

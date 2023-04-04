@@ -10,11 +10,11 @@ ActiveAdmin.register Comment, as: "ArticleComment" do
         column :article
     end
     form do |f|
-        f.inputs do
-          f.input :body
-          f.input :user_id, as: :select, collection: User.all.map { |u| [u.email, u.id] }
-          f.input :article_id, as: :select, collection: Article.all.map { |a| [a.title, a.id] }
-        end
-        f.actions
+      f.inputs do
+        f.input :body
+        f.input :user_id, as: :select, collection: User.all.map { |u| [u.email, u.id] }
+        f.input :article_id, as: :select, collection: Article.all.map { |a| [a.title, a.id] }
       end
+      f.actions
+    end
 end
